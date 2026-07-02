@@ -21,6 +21,22 @@ if tablero[fila][columna] == " ":
     tablero[fila][columna] = "X" #casilla vacia pon x
 else: 
     print("La posición ya está ocupada. Intente nuevamente.")
+    
+def ganador(tablero, jugador):
+   # Comprobar filas
+    for fila in tablero:
+        if all(casilla == jugador for casilla in fila):
+            return True
+    # Comprobar columnas
+    for columna in range(3):
+        if all(tablero[fila][columna] == jugador for fila in range(3)):
+            return True
+    # Comprobara diagonales
+    if all(tablero[i][i] == jugador for i in range(3)):
+        return True
+    if all(tablero[i][2 - i] == jugador for i in range(3)):
+        return True
+    return False
 
 while True:
     # Turno del jugador
@@ -39,5 +55,3 @@ while True:
         if tablero[fila_laptop][columna_laptop] == " ":
             tablero[fila_laptop][columna_laptop] = "O"
             break
-
- 
