@@ -40,7 +40,7 @@ def jugada_usuario(board):
                 break
             else:
                 print("Esa casilla ya está ocupada.")
-        except (ValueError, IndexError):
+        except (ValueError, IndexError): #error del usuario 
             print("Entrada inválida, intenta de nuevo.")
 
 
