@@ -15,12 +15,12 @@ def mostrar_tablero():
 mostrar_tablero()
 
 #posicionar ficha del jugador
-fila = int(input("Ingrese el número de fila (0-2): "))
-columna = int(input("Ingrese el número de columna (0-2): "))
-if tablero[fila][columna] == " ":
-    tablero[fila][columna] = "X" #casilla vacia pon x
-else: 
-    print("La posición ya está ocupada. Intente nuevamente.")
+# fila = int(input("Ingrese el número de fila (0-2): "))
+# columna = int(input("Ingrese el número de columna (0-2): "))
+# if tablero[fila][columna] == " ":
+#     tablero[fila][columna] = "X" #casilla vacia pon x
+# else: 
+#     print("La posición ya está ocupada. Intente nuevamente.")
     
 def ganador(tablero, jugador):
    # Comprobar filas
@@ -37,7 +37,11 @@ def ganador(tablero, jugador):
     if all(tablero[i][2 - i] == jugador for i in range(3)):
         return True
     return False
-
+def tablero_lleno(tablero):
+    for fila in tablero:
+        if " " in fila:
+            return False
+    return True
 while True:
     # Turno del jugador
     mostrar_tablero()
@@ -48,6 +52,11 @@ while True:
     else:
         print("La posición ya está ocupada. Intente nuevamente.")
         continue
+
+    if ganador(tablero, "X"):
+        mostrar_tablero()
+        print("¡El ganador es el jugador!")
+        break
     # Turno del ordenador
     while True:
         fila_laptop = random.randint(0, 2)
@@ -55,3 +64,13 @@ while True:
         if tablero[fila_laptop][columna_laptop] == " ":
             tablero[fila_laptop][columna_laptop] = "O"
             break
+    mostrar_tablero()
+
+    if ganador(tablero, "O"):
+        mostrar_tablero()
+        print("¡El ganador es el ordenador!")
+        break
+    if tablero_lleno(tablero):
+        mostrar_tablero()
+        print("¡El juego es un empate!")
+        break
