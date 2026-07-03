@@ -14,13 +14,6 @@ def mostrar_tablero():
 
 mostrar_tablero()
 
-#posicionar ficha del jugador
-# fila = int(input("Ingrese el número de fila (0-2): "))
-# columna = int(input("Ingrese el número de columna (0-2): "))
-# if tablero[fila][columna] == " ":
-#     tablero[fila][columna] = "X" #casilla vacia pon x
-# else: 
-#     print("La posición ya está ocupada. Intente nuevamente.")
     
 def ganador(tablero, jugador):
    # Comprobar filas
