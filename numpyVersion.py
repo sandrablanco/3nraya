@@ -1,3 +1,4 @@
+from main import mostrar_tablero
 import numpy as np
 import random
 
@@ -30,6 +31,9 @@ if np.all(np.diag(np.fliplr(board)) == jugador):
 
 def empate(board):
     return not np.any(board == " ")
+def empty_casillas(board):
+    return np.argwhere(board == " ")
+    return list(zip(row, column))
 def jugada_usuario(board):
     while True:
         try:
@@ -44,7 +48,34 @@ def jugada_usuario(board):
             print("Entrada inválida, intenta de nuevo.")
 
 
-# if board[row, column] == " ":
-#     board[row, column] = "X"
-# if board[row_laptop, column_laptop] == " ":
-#     board[row_laptop, column_laptop] = "O"
+def laptop_move(board):
+    empty_cells = empty_casillas(board)
+    if empty_cells.size > 0:
+        row, column = random.choice(empty_cells)
+        board[row, column] = "O"
+
+def play():
+board = create_board()
+mostrar_tablero()
+while True:
+    jugada_usuario(board)
+    if check_winner(board, "X"):
+        show_board()
+        print("¡El jugador gana!")
+        break
+    if empate(board):
+        show_board()
+        print("¡Empate!")
+        break
+
+    laptop_move(board)
+    if check_winner(board, "O"):
+        show_board()
+        print("¡El ordenador gana!")
+        break
+    if empate(board):
+        show_board()
+        print("¡Empate!")
+        break
+if __name__ == "__main__":
+    play()
